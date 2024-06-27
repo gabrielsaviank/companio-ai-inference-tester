@@ -10,9 +10,20 @@ class DocumentService {
             const result = await this.model.insertMany(documents);
 
             return result;
-        } catch (error) {
-            console.error("Error creating multiple document entries:", error);
-            throw error;
+        } catch (exception) {
+            console.error("Error creating multiple document entries:", exception);
+            throw exception;
+        }
+    }
+
+
+    async getDocuments() {
+        try {
+            const documents = await this.model.get();
+            return documents
+        } catch (exception) {
+            console.error("Error creating multiple document entries:", exception);
+            throw exception
         }
     }
 }
