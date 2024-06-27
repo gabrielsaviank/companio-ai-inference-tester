@@ -2,6 +2,9 @@ import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cors from "cors"
+import { config } from "dotenv";
+
+import {documentRoutes} from "./routes/documentRoutes.js";
 
 const app = express();
 
@@ -12,10 +15,26 @@ const corsOptions = {
 };
 
 
-function main () {
-    app.listen(5000, () => {
-        console.log("AlleSys: Fetch - DB Connected and Listening on Port 5000");
-    });
+config();
+
+app.use(cors(corsOptions));
+app.use(bodyParser.json());
+
+app.use('/document', documentRoutes);
+
+async function main () {
+    try {
+        await mongoose.connect(process.env.DB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+
+        app.listen(5000, () => {
+            console.log("Fetched - DB Connected");
+        });
+    } catch (exception) {
+        console.error("Error Connecting to the DB", exception);
+    }
 };
 
-main();
+main().then(r => console.log("Running API on Port 5000"));
