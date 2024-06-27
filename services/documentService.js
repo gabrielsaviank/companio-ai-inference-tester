@@ -6,15 +6,30 @@ class DocumentService {
     }
 
     async createMultipleDocumentEntries(documents) {
+        if (!documents) {
+            console.error("No documents provided");
+            throw new Error("No documents provided");
+        }
+
         try {
             const result = await this.model.insertMany(documents);
-
             return result;
-        } catch (error) {
-            console.error("Error creating multiple document entries:", error);
-            throw error;
+        } catch (exception) {
+            console.error("Error creating multiple document entries:", exception);
+            throw exception;
+        }
+    }
+
+    async getDocuments() {
+        try {
+            const documents = await this.model.find();
+            return documents;
+        } catch (exception) {
+            console.error("Error fetching documents:", exception);
+            throw exception;
         }
     }
 }
 
+// const documentService = new DocumentService(Document);
 export default DocumentService;

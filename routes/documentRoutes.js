@@ -6,3 +6,5 @@ const router = Router();
 const DocumentCont = new DocumentController();
 
 router.post('/documents/create-multiple', DocumentCont.createMultipleDocumentEntries);
+
+export const documentRoutes = router;

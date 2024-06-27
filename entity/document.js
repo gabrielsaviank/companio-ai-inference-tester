@@ -50,4 +50,5 @@ const documentSchema = new Schema({
     }
 });
 
-export const DocumentSchema = mongoose.model("Document", documentSchema);
+const Document = mongoose.model("Document", documentSchema);
+export default Document;
