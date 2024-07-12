@@ -13,6 +13,7 @@ class DocumentService {
 
         try {
             const result = await this.model.insertMany(documents);
+
             return result;
         } catch (exception) {
             console.error("Error creating multiple document entries:", exception);
