@@ -21,12 +21,30 @@ class DocumentService {
         }
     }
 
+    // Use this to train
     async getDocuments() {
         try {
             const documents = await this.model.find();
             return documents;
         } catch (exception) {
             console.error("Error fetching documents:", exception);
+            throw exception;
+        }
+    }
+
+    async predictDocumentEntries(document) {
+        if (!document) {
+            console.error("No document provided");
+            throw new Error("No document provided");
+        }
+
+        try {
+            const documentToPredict = null;
+            // const result = await this.model.insertMany(documents);
+
+            return documentToPredict;
+        } catch (exception) {
+            console.error("Error creating multiple document entries:", exception);
             throw exception;
         }
     }

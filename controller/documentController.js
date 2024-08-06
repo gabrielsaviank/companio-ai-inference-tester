@@ -13,6 +13,7 @@ class DocumentController{
         }
 
         try {
+            // Check this
             const documents = req.body;
             const documentsToInsert = await DocumentS.createMultipleDocumentEntries(documents);
 
@@ -29,6 +30,22 @@ class DocumentController{
             res.status(200).json(documents);
         } catch (error) {
             res.status(500).json({ error: "Error getting documents" });
+        }
+    }
+
+    async predictDocumentEntry(req, res) {
+        const document = req.body.document;
+
+        if(!document) {
+            res.status(500).json({ error: "Must provide a document" });
+        }
+
+        try {
+            const documentToPredict = await DocumentS.predictDocumentEntries(document);
+
+            res.status(201).json(documentToPredict);
+        } catch (error) {
+            res.status(500).json({ error: "Error creating multiple document entries" });
         }
     }
 }
